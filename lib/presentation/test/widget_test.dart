@@ -1,5 +1,5 @@
-import 'package:adaptive_master_detail_layouts/item_details.dart';
-import 'package:adaptive_master_detail_layouts/main.dart';
+import 'package:adaptive_master_detail_layouts/presentation/item_details.dart';
+import 'package:adaptive_master_detail_layouts/presentation/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,4 +1,4 @@
-import 'package:adaptive_master_detail_layouts/item.dart';
+import 'package:adaptive_master_detail_layouts/presentation/item.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -14,13 +14,17 @@ class ItemListing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: items.map((item) {
-        return ListTile(
-          title: Text(item.title),
-          onTap: () => itemSelectedCallback(item),
-          selected: selectedItem == item,
-        );
-      }).toList(),
+      children: buildList(),
     );
+  }
+
+  List<ListTile> buildList() {
+    return items.map((item) {
+      return ListTile(
+        title: Text(item.title),
+        onTap: () => itemSelectedCallback(item),
+        selected: selectedItem == item,
+      );
+    }).toList();
   }
 }

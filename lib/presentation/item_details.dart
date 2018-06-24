@@ -1,4 +1,4 @@
-import 'package:adaptive_master_detail_layouts/item.dart';
+import 'package:adaptive_master_detail_layouts/presentation/item.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
