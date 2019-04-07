@@ -21,9 +21,8 @@ abstract class PostsStoreBase implements Store {
 }
 
 Future<List<Post>> fetchPosts() async {
-  List<Post> posts = [];
   final response = await http.get(
-      'https://jsonplaceholder.typicode.com/posts/1');
+      'https://jsonplaceholder.typicode.com/posts');
 
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);

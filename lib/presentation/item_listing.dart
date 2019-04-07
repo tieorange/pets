@@ -50,10 +50,14 @@ class _ItemListingState extends State<ItemListing> {
   Widget build(BuildContext context) {
     return Container(
       child: Observer(
-        builder: (_) => ((postsStore.postsList != null) &&
-                (postsStore.postsList.isNotEmpty))
+        builder: (_) {
+          var dataIsValid = ((postsStore.postsList != null) &&
+                (postsStore.postsList.isNotEmpty));
+
+          return dataIsValid
             ? buildList(postsStore.postsList)
-            : buildProgress(),
+            : buildProgress();
+        },
       ),
     );
   }
@@ -67,5 +71,5 @@ class _ItemListingState extends State<ItemListing> {
     }).toList();
   }
 
-  buildProgress() => CircularProgressIndicator();
+  buildProgress() => Text('loading');
 }
