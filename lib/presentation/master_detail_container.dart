@@ -1,17 +1,10 @@
-import 'dart:math';
-
+import 'dart:convert';
 import 'package:adaptive_master_detail_layouts/presentation/item.dart';
 import 'package:adaptive_master_detail_layouts/presentation/item_details.dart';
 import 'package:adaptive_master_detail_layouts/presentation/item_listing.dart';
-import 'package:adaptive_master_detail_layouts/presentation/main2.dart';
 import 'package:flutter/material.dart';
-
 
 import 'package:adaptive_master_detail_layouts/domain/Post.dart';
-import 'package:adaptive_master_detail_layouts/presentation/master_detail_container.dart';
-import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // https://ua-pl-pets.herokuapp.com/api/test
@@ -30,23 +23,6 @@ Future<Post> fetchPost() async {
   }
 }
 
-class Post {
-  final int userId;
-  final int id;
-  final String title;
-  final String body;
-
-  Post({this.userId, this.id, this.title, this.body});
-
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-      body: json['body'],
-    );
-  }
-}
 
 class MasterDetailContainer extends StatefulWidget {
   MasterDetailContainer(Post data);
@@ -57,33 +33,13 @@ class MasterDetailContainer extends StatefulWidget {
 }
 
 class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
-  final Future<Post> post;
-
   static const int kTabletBreakpoint = 600;
 
   Item _selectedItem;
 
-  Widget _buildMobileLayout() {
-    return Container(
-      child: FutureBuilder<Post>(
-        future: post,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return buildLayout(snapshot.data);
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-
-          // By default, show a loading spinner
-          return CircularProgressIndicator();
-        },
-      )
-    );
-  }
-
-  Widget _ buildLayout(Post data){
+  Widget buildLayout(Post data) {
     return ItemListing(
-      itemSelectedCallback: (item) {
+      /*itemSelectedCallback: (item) {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -95,15 +51,15 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
             },
           ),
         );
-      },
-    )
+      },*/
+    );
   }
 
-  Widget _buildTabletLayout() {
+  /*Widget _buildTabletLayout() {
     return Row(
       children: <Widget>[
         Container(
-          child:  Flexible(
+          child: Flexible(
             flex: 1,
             child: Material(
               elevation: 4.0,
@@ -127,22 +83,25 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
         ),
       ],
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     Widget content;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    var shortestSide = MediaQuery
+        .of(context)
+        .size
+        .shortestSide;
 
 //    if (shortestSide < kTabletBreakpoint) {
-      content = _buildMobileLayout();
+    content = buildLayout(Post()); // TODO
 //    } else {
 //      content = _buildTabletLayout();
 //    }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Master-detail flow sample'),
+        title: Container(child: Text('Master-detail flow sample')),
       ),
       body: content,
     );
